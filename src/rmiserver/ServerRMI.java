@@ -389,17 +389,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 
 	public boolean verifyUser(String nome, String ccNumber, String password) throws RemoteException {
 
-		System.out.println(nome);
-		System.out.println(ccNumber);
-		System.out.println(password);
-		System.out.println("-----------");
-
-		for (int i = 0; i < person.size(); i++) {
-			System.out.println(person.get(i).getNome());
-			System.out.println(person.get(i).getCCnumber());
-			System.out.println(person.get(i).getPassword());
-		}
-
 		for (int i = 0; i < person.size(); i++) {
 			if (person.get(i).nome.equals(nome) && person.get(i).CCnumber.equals(ccNumber) && person.get(i).password.equals(password)) {
 				return true;

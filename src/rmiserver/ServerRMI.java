@@ -48,7 +48,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		super();
 
 	}
-
 	public void addTable(String name, String cc, String table) throws RemoteException {
 		for(int i = 0; i< person.size(); i++){
 			if(person.get(i).getNome().equals(name) && person.get(i).getCCnumber().equals(cc)){
@@ -56,63 +55,48 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 			}
 		}
 	}
-
 	public ArrayList<Pessoa> getEstudantes() throws RemoteException {
 		return this.Estudantes;
 	}
-
 	public ArrayList<Pessoa> getPerson() throws RemoteException {
 		return this.person;
 	}
-
 	public ArrayList<Pessoa> getDocentes() throws RemoteException {
 		return this.Docentes;
 	}
-
 	public ArrayList<Pessoa> getFuncionarios() throws RemoteException {
 		return this.Funcionarios;
 	}
-
 	public ArrayList<Eleicao> getEleicoes() throws RemoteException {
 		return this.eleicoes;
 	}
-
 	public ArrayList<InterfaceClientRMI> getClients() throws RemoteException {
 		return this.clients;
 	}
-
 	public ArrayList<InterfaceClientRMI> getAdminClients() throws RemoteException {
 		return this.clients;
 	}
-
 	public ArrayList<String> getLocal() throws RemoteException{
 		return this.local;
 	}
-	
 	public void addLocal(String data) throws RemoteException{
 		this.local.add(data);
 	}
-	
 	public void remeveLocal(int a) throws RemoteException{
 		this.local.remove(a);
 	}
-
 	public String getCrashName() throws RemoteException {
 		return this.crashName;
 	}
-
 	public String getCrashCC() throws RemoteException {
 		return this.crashCC;
 	}
-
 	public void setCrashName(String name) throws RemoteException {
 		this.crashName = name;
 	}
-
 	public void setCrashCC(String CC) throws RemoteException {
 		this.crashCC = CC;
 	}
-
 	public void loadDataElection() throws RemoteException {
 
 		System.out.println("Getting data....");
@@ -211,7 +195,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 
 	}
-
 	public void SaveRegistry(Pessoa pessoa) throws RemoteException {
 
 		File arquivo = new File("Pessoas.txt");
@@ -246,7 +229,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 		return;
 	}
-
 	public void gerirEleicao(Lista l, int eleNum, int opt, int indexLi) throws IOException {
 
 		if (opt == 2) {
@@ -260,14 +242,12 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 
 	}
-
 	public void alteraEleicao(Eleicao e, int numEle) throws IOException {
 
 		eleicoes.remove(numEle);
 		eleicoes.add(e);
 		writeToFile("eleicao.txt");
 	}
-
 	public void criarEleicao(Eleicao eleicao) throws RemoteException {
 
 		try {
@@ -291,23 +271,19 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 
 	}
-
 	public void saveClients(String name, InterfaceClientRMI a) throws RemoteException {
 		System.out.println("CONNECTED WITH " + name);
 		clients.add(a);
 
 	}
-
 	public void saveAdmin(String name, InterfaceClientRMI a) throws RemoteException {
 		System.out.println("CONNECTED WITH " + name);
 		clientsAdmin.add(a);
 
 	}
-
 	public void print_on_server(String s) throws RemoteException {
 		System.out.println("> " + s);
 	}
-
 	public boolean stateOfElections(Eleicao eleicao, int option) throws RemoteException, ParseException {
 
 		String dataInicial = eleicao.getDataInicio();
@@ -350,7 +326,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		return false;
 
 	}
-
 	public void saveVotes(String eleicao, String lista) throws RemoteException {
 
 		// eleicao
@@ -386,7 +361,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 		writeToFile("eleicao.txt");
 	}
-
 	public boolean verifyUser(String nome, String ccNumber, String password) throws RemoteException {
 
 		for (int i = 0; i < person.size(); i++) {
@@ -397,7 +371,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		return false;
 
 	}
-
 	public boolean verifyLogin(String nome, String ccNumber) throws RemoteException {
 
 		for (int i = 0; i < person.size(); i++) {
@@ -407,7 +380,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 		return false;
 	}
-
 	public void notifyClient(String name, String tag) throws RemoteException {
 
 		for (int i = 0; i < clientsAdmin.size(); i++) {
@@ -415,7 +387,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 
 	}
-
 	public void saveUserVote(String name, String ccNumber, String election) throws RemoteException {
 
 		Pessoa aux = null;
@@ -434,7 +405,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 
 		writeToFile("eleicao.txt");
 	}
-
 	public boolean verifyUserinArray(String name, String ccNUmber, Eleicao election) throws RemoteException {
 
 		for (int i = 0; i < election.getpeopleWhoVoted().size(); i++) {
@@ -444,7 +414,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 		return false;
 	}
-
 	public void saveVotedPlaceOnPeople(String name, String ccNumber, String table) throws RemoteException {
 
 		Pessoa aux = null;
@@ -458,7 +427,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		writeToFile("eleicao.txt");
 
 	}
-
 	public void writeToFile(String ficheiro) throws RemoteException {
 		try {
 
@@ -476,7 +444,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 
 		}
 	}
-
 	public String getUserproperties(String name, String ccNumber) throws RemoteException {
 
 		for (int i = 0; i < person.size(); i++) {
@@ -486,7 +453,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 		return "";
 	}
-
 	public static void main(String args[]) throws IOException, InterruptedException {
 
 		String a;
@@ -592,61 +558,33 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 
 	}
-
 }
 
 class NewThread extends Thread {
-
 	public void run() { // entry point
-
 		DatagramSocket aSocket = null;
-
 		int serverPort = 6789;
-
 		InetAddress host = null;
-
 		try {
-
 			aSocket = new DatagramSocket(6789);
-
 		} catch (SocketException e) {
-
 			e.printStackTrace();
-
 		}
-
 		while (true) {
-
 			byte[] buffer = new byte[1000];
-
 			DatagramPacket request = new DatagramPacket(buffer, buffer.length);
-
 			try {
-
 				aSocket.receive(request);
-
 			} catch (IOException e) {
-
 				e.printStackTrace();
-
 			}
-
 			byte[] buff = new byte[1000];
-
-			DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), request.getAddress(),
-					request.getPort());
-
+			DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), request.getAddress(), request.getPort());
 			try {
-
 				aSocket.send(reply);
-
 			} catch (IOException e) {
-
 				e.printStackTrace();
-
 			}
-
 		}
 	}
-
 }

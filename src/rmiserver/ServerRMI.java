@@ -48,6 +48,32 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		super();
 
 	}
+
+	//functions 2 meta
+	public void addListToElection(String nameElection,String listname, rmiserver.Pessoa p) throws RemoteException {
+		Lista list = new Lista(null,p,listname);
+		for(int i = 0; i < eleicoes.size(); i++){
+			if(eleicoes.get(i).getNome().equals(nameElection)){
+				ArrayList<Lista> aux = eleicoes.get(i).getListas();
+				if(aux == null){
+					aux = new ArrayList<Lista>();
+				}
+				aux.add(list);
+				eleicoes.get(i).setListas(aux);
+			}
+		}
+		writeToFile("eleicao.txt");
+
+		for(int i = 0; i < eleicoes.size(); i++){
+			if(eleicoes.get(i).getNome().equals(nameElection)){
+				for(int j = 0; j < eleicoes.get(i).getListas().size(); j++){
+					System.out.println(eleicoes.get(i).getListas().get(j).getNomeLista());
+				}
+			}
+		}
+	}
+
+
 	public void addTable(String name, String cc, String table) throws RemoteException {
 		for(int i = 0; i< person.size(); i++){
 			if(person.get(i).getNome().equals(name) && person.get(i).getCCnumber().equals(cc)){
@@ -55,6 +81,8 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 			}
 		}
 	}
+
+
 	public ArrayList<Pessoa> getEstudantes() throws RemoteException {
 		return this.Estudantes;
 	}
@@ -587,4 +615,5 @@ class NewThread extends Thread {
 			}
 		}
 	}
+
 }

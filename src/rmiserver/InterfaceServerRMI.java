@@ -40,4 +40,8 @@ public interface InterfaceServerRMI extends Remote{
 	public void addLocal(String data) throws RemoteException;
 	public void remeveLocal(int a) throws RemoteException;
 	public void addTable(String name, String cc, String table) throws RemoteException ;
+
+	//2 meta
+
+	public void addListToElection(String nameElection,String listname, rmiserver.Pessoa p) throws RemoteException;
 }

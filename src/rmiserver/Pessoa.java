@@ -12,10 +12,10 @@ public class Pessoa implements Serializable {
      *
      */
     private static final long serialVersionUID = 1L;
-    public String nome, password, trabalho, departamento, telemovel, morada, CCnumber, CCVal;
+    public String nome, password, trabalho, departamento, telemovel, morada, CCnumber, CCVal, typePerson;
     public ArrayList<String> Tables = new  ArrayList<String>();
 
-    public Pessoa(String nome, String password, String job, String telemovel, String morada, String CCnumber, String CCVal, String departamento, ArrayList<String> Tables){
+    public Pessoa(String nome, String password, String job, String telemovel, String morada, String CCnumber, String CCVal, String departamento, ArrayList<String> Tables,String typePerson){
         this.nome = nome;
         this.password = password;
         this.trabalho = job;
@@ -25,6 +25,7 @@ public class Pessoa implements Serializable {
         this.CCnumber = CCnumber;
         this.CCVal = CCVal;
         this.Tables = Tables;
+        this.typePerson = typePerson;
     }
 
     public Pessoa() {
@@ -98,6 +99,10 @@ public class Pessoa implements Serializable {
         return this.Tables;
     }
 
+    public String getTypePerson() {
+        return typePerson;
+    }
+
     public String toString(){//overriding the toString() method
         return  "USERNAME: "       + this.nome         +
                 "\nPASSWORD: "     + this.password     +
@@ -106,7 +111,8 @@ public class Pessoa implements Serializable {
                 "\nTELE: "         + this.telemovel    +
                 "\nADRESS: "       + this.morada       +
                 "\nCCNUMBER: "     + this.CCnumber     +
-                "\nCCVAL: "        + this.CCVal        ;
+                "\nCCVAL: "        + this.CCVal        +
+                "\nType: "         + this.typePerson    ;
     }
 
     public void RegisterPerson() throws IOException {
@@ -165,6 +171,10 @@ public class Pessoa implements Serializable {
         in = reader.readLine();
 
         this.password = in;
+
+        System.out.println("ADMIN/USER");
+        in = reader.readLine();
+        this.typePerson = in;
 
     }
 }

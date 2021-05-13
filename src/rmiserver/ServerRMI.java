@@ -484,7 +484,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 	public void saveUserVote(String name, String ccNumber, String election) throws RemoteException {
 
 		Pessoa aux = null;
-
 		for (int i = 0; i < person.size(); i++) {
 			if (person.get(i).nome.equals(name) && person.get(i).CCnumber.equals(ccNumber)) {
 				aux = person.get(i);
@@ -493,10 +492,16 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 
 		for (int i = 0; i < eleicoes.size(); i++) {
 			if (eleicoes.get(i).nome.equals(election)) {
-				eleicoes.get(i).getpeopleWhoVoted().add(aux);
+				//eleicoes.get(i).getpeopleWhoVoted().add(aux);
+				ArrayList<Pessoa> auxPepople = eleicoes.get(i).getpeopleWhoVoted();
+				if(auxPepople == null){
+					auxPepople = new ArrayList<Pessoa>();
+				}
+				auxPepople.add(aux);
+				eleicoes.get(i).setPeopleWhoVoted(auxPepople);
 			}
 		}
-
+		System.out.println(aux.getNome());
 		writeToFile("eleicao.txt");
 	}
 	public boolean verifyUserinArray(String name, String ccNUmber, Eleicao election) throws RemoteException {

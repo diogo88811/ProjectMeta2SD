@@ -58,6 +58,11 @@ public class Eleicao implements Serializable {
     public void setPublicoAlvo(String publicoAlvo) {
         this.publicoAlvo = publicoAlvo;
     }
+
+    public void setPeopleWhoVoted(ArrayList<Pessoa> peopleWhoVoted) {
+        this.peopleWhoVoted = peopleWhoVoted;
+    }
+
     public ArrayList<Lista> getListas() {
         return listas;
     }

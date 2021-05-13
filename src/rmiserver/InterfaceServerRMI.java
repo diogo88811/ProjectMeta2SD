@@ -43,5 +43,9 @@ public interface InterfaceServerRMI extends Remote{
 
 	//2 meta
 
-	public void addListToElection(String nameElection,String listname, rmiserver.Pessoa p) throws RemoteException;
-}
+	public void addListToElection(String nameElection, String listname, rmiserver.Pessoa p, ArrayList<String> participants) throws RemoteException;
+	public void changeElection(String election, String nome, String initDate, String endDate) throws RemoteException;
+	public void removeElection(String election) throws RemoteException;
+	public void removeList(String eleicao, String list) throws RemoteException;
+	public void changeList(String election, String list, String name) throws RemoteException;
+	}

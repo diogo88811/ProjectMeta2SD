@@ -53,13 +53,13 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 	}
 
 	//FUNCOES META 2
+
 	public void addListToElection(String nameElection, String listname, rmiserver.Pessoa p, ArrayList<String> participants) throws RemoteException {
 
 		ArrayList<Pessoa> personAux = new ArrayList<Pessoa>();
 		for(int i = 0; i< participants.size(); i++) {
 			for (int j = 0; j < person.size(); j++){
 				if (participants.get(i).equals(person.get(j).getNome())){
-					System.out.println("- " + person.get(j).getNome());
 					personAux.add(person.get(j));
 				}
 			}

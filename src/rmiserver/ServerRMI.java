@@ -98,7 +98,70 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		writeToFile("eleicao.txt");
 	}
 
-	public void changeList(String election, String list, String name, String pricipalCandidate, ArrayList<String> addPeople, ArrayList<String> removePeople) throws RemoteException{
+	public void addPeopleToList(String election, String list, ArrayList<String> addPeople) throws RemoteException{
+		int eleicaoIndex = 0;
+		int listaIndex = 0;
+
+		for(int i = 0; i<eleicoes.size(); i++) {
+			if (eleicoes.get(i).getNome().equals(election)) {
+				eleicaoIndex = i;
+			}
+		}
+
+		for(int i = 0; i<eleicoes.get(eleicaoIndex).getListas().size(); i++) {
+			if (eleicoes.get(eleicaoIndex).getListas().get(i).getNomeLista().equals(list)) {
+				listaIndex = i;
+			}
+		}
+
+		if(addPeople != null){
+			for(int i = 0; i<addPeople.size(); i++){
+				Pessoa pessoa = new Pessoa();
+				for(int k = 0; k<person.size(); k++){
+					if(person.get(k).getNome().equals(addPeople.get(i))){
+						pessoa = person.get(k);
+					}
+				}
+				eleicoes.get(eleicaoIndex).getListas().get(listaIndex).pessoas.add(pessoa);
+			}
+		}
+
+		writeToFile("eleicao.txt");
+
+	}
+
+	public void removePeopleFromList(String election, String list, ArrayList<String> removePeople) throws RemoteException{
+		int eleicaoIndex = 0;
+		int listaIndex = 0;
+
+		for(int i = 0; i<eleicoes.size(); i++) {
+			if (eleicoes.get(i).getNome().equals(election)) {
+				eleicaoIndex = i;
+			}
+		}
+
+		for(int i = 0; i<eleicoes.get(eleicaoIndex).getListas().size(); i++) {
+			if (eleicoes.get(eleicaoIndex).getListas().get(i).getNomeLista().equals(list)) {
+				listaIndex = i;
+			}
+		}
+
+		if(removePeople != null){
+			for(int i = 0; i<removePeople.size(); i++){
+				Pessoa pessoa = new Pessoa();
+				for(int k = 0; k<person.size(); k++){
+					if(person.get(k).getNome().equals(removePeople.get(i))){
+						pessoa = person.get(k);
+						eleicoes.get(eleicaoIndex).getListas().get(listaIndex).pessoas.remove(pessoa);
+					}
+				}
+			}
+		}
+
+		writeToFile("eleicao.txt");
+	}
+
+	public void changeList(String election, String list, String name, String pricipalCandidate) throws RemoteException{
 		int eleicaoIndex = 0;
 		int listaIndex = 0;
 
@@ -125,43 +188,12 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 				}
 			}
 		}
-		ArrayList<Pessoa> aux = new ArrayList<Pessoa>();
-
-		if(addPeople != null){
-			aux = eleicoes.get(eleicaoIndex).getListas().get(listaIndex).getPessoas();
-			for(int t = 0; t<addPeople.size(); t++){
-				for(int k = 0; k<person.size(); k++){
-					if(person.get(k).getNome().equals(addPeople.get(t))){
-						aux.add(person.get(k));
-					}
-				}
-			}
-		}
-		eleicoes.get(eleicaoIndex).getListas().get(listaIndex).setPessoas(aux);
-
-		for(int i = 0; i<aux.size(); i++) {
-			System.out.println("----------------- " + aux.get(i).getNome());
-		}
-
-		if(removePeople != null){
-			for(int t = 0; t<removePeople.size(); t++){
-				for(int k = 0; k<person.size(); k++){
-					if(person.get(k).getNome().equals(addPeople.get(t))){
-						System.out.println("entrei2");
-						eleicoes.get(eleicaoIndex).getListas().get(listaIndex).getPessoas().remove(person.get(k));
-					}
-				}
-			}
-		}
-		for(int i = 0; i<eleicoes.get(eleicaoIndex).getListas().get(listaIndex).getPessoas().size(); i++){
-			System.out.println(eleicoes.get(eleicaoIndex).getListas().get(listaIndex).getPessoas().get(i).getNome());
-		}
-
 
 		writeToFile("eleicao.txt");
 
 		System.out.println("Lista Alterada Com Sucesso !");
 	}
+
 	public void removeElection(String election) throws RemoteException{
 		for(int i = 0; i<eleicoes.size(); i++){
 			if(eleicoes.get(i).getNome().equals(election)){

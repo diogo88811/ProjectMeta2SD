@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.Date;
+import java.util.Properties;
 
 public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI {
 
@@ -46,10 +47,10 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 	ArrayList<InterfaceClientRMI> clients = new ArrayList<InterfaceClientRMI>();
 	ArrayList<String> local = new ArrayList<String>();
 	String crashName, crashCC = "";
+	Properties file = new Properties();
 
 	public ServerRMI() throws RemoteException {
 		super();
-
 	}
 
 	//FUNCOES META 2
@@ -230,45 +231,59 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 	public ArrayList<Pessoa> getEstudantes() throws RemoteException {
 		return this.Estudantes;
 	}
+
 	public ArrayList<Pessoa> getPerson() throws RemoteException {
 		return this.person;
 	}
+
 	public ArrayList<Pessoa> getDocentes() throws RemoteException {
 		return this.Docentes;
 	}
+
 	public ArrayList<Pessoa> getFuncionarios() throws RemoteException {
 		return this.Funcionarios;
 	}
+
 	public ArrayList<Eleicao> getEleicoes() throws RemoteException {
 		return this.eleicoes;
 	}
+
 	public ArrayList<InterfaceClientRMI> getClients() throws RemoteException {
 		return this.clients;
 	}
+
 	public ArrayList<InterfaceClientRMI> getAdminClients() throws RemoteException {
 		return this.clients;
 	}
+
 	public ArrayList<String> getLocal() throws RemoteException{
 		return this.local;
 	}
+
 	public void addLocal(String data) throws RemoteException{
 		this.local.add(data);
 	}
+
 	public void remeveLocal(int a) throws RemoteException{
 		this.local.remove(a);
 	}
+
 	public String getCrashName() throws RemoteException {
 		return this.crashName;
 	}
+
 	public String getCrashCC() throws RemoteException {
 		return this.crashCC;
 	}
+
 	public void setCrashName(String name) throws RemoteException {
 		this.crashName = name;
 	}
+
 	public void setCrashCC(String CC) throws RemoteException {
 		this.crashCC = CC;
 	}
+
 	public void loadDataElection() throws RemoteException {
 
 		System.out.println("Getting data....");
@@ -543,6 +558,13 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		writeToFile("eleicao.txt");
 	}
 
+	public void createTable(String name, String ip) throws IOException {
+		FileOutputStream fis = new FileOutputStream("config.properties");
+		file.put(name, ip);
+		file.store(fis, "File Updated");
+		fis.close();
+	}
+
 	public boolean verifyUser(String nome, String ccNumber, String password) throws RemoteException {
 
 		for (int i = 0; i < person.size(); i++) {
@@ -563,6 +585,7 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 		return false;
 	}
+
 	public void notifyClient(String name, String tag) throws RemoteException {
 
 		for (int i = 0; i < clientsAdmin.size(); i++) {
@@ -570,6 +593,7 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 
 	}
+
 	public void saveUserVote(String name, String ccNumber, String election) throws RemoteException {
 
 		Pessoa aux = null;
@@ -593,6 +617,7 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		System.out.println(aux.getNome());
 		writeToFile("eleicao.txt");
 	}
+
 	public boolean verifyUserinArray(String name, String ccNUmber, Eleicao election) throws RemoteException {
 
 		for (int i = 0; i < election.getpeopleWhoVoted().size(); i++) {
@@ -602,6 +627,7 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 		return false;
 	}
+
 	public void saveVotedPlaceOnPeople(String name, String ccNumber, String table) throws RemoteException {
 
 		Pessoa aux = null;
@@ -612,9 +638,10 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 		aux.getTables().add(table);
 
-		writeToFile("eleicao.txt");
+		writeToFile("Pessoas.txt");
 
 	}
+
 	public void writeToFile(String ficheiro) throws RemoteException {
 		try {
 
@@ -632,6 +659,7 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 
 		}
 	}
+
 	public String getUserproperties(String name, String ccNumber) throws RemoteException {
 
 		for (int i = 0; i < person.size(); i++) {
@@ -641,6 +669,7 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 		return "";
 	}
+
 	public static void main(String args[]) throws IOException, InterruptedException {
 
 		String a;

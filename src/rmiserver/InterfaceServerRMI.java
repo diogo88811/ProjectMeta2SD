@@ -50,4 +50,5 @@ public interface InterfaceServerRMI extends Remote{
 	public void changeList(String election, String list, String name, String pricipalCandidate) throws RemoteException;
 	public void removePeopleFromList(String election, String list, ArrayList<String> removePeople) throws RemoteException;
 	public void addPeopleToList(String election, String list, ArrayList<String> addPeople) throws RemoteException;
+	public void createTable(String name, String ip) throws IOException;
 	}

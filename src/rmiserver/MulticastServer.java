@@ -242,7 +242,7 @@ public class MulticastServer extends Thread {
 
             } catch (Exception e) {
 
-                h = (InterfaceServerRMI) LocateRegistry.getRegistry(7000).lookup("RMI Server");
+                h = (InterfaceServerRMI) LocateRegistry.getRegistry(7000).lookup("RMIServer");
                 h.saveClients(this.getName(), (InterfaceClientRMI) client);
                 h.notifyClient(this.getName(), " -> on");
             }
@@ -265,7 +265,7 @@ public class MulticastServer extends Thread {
 
     public static void main(String[] args) throws IOException, NotBoundException {
 
-        InterfaceServerRMI h = (InterfaceServerRMI) LocateRegistry.getRegistry(7000).lookup("RMI Server");
+        InterfaceServerRMI h = (InterfaceServerRMI) LocateRegistry.getRegistry(7000).lookup("RMIServer");
         server = new MulticastServer(h, args[0], args[0]); // THREAD RECEBE
         server.start();
         RuntimeDemo time = new RuntimeDemo(h, server);

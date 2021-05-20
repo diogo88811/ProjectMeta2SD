@@ -591,7 +591,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		for (int i = 0; i < clientsAdmin.size(); i++) {
 			clientsAdmin.get(i).print_on_client(name + tag);
 		}
-
 	}
 
 	public void saveUserVote(String name, String ccNumber, String election) throws RemoteException {
@@ -777,6 +776,7 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 		}
 
 	}
+
 }
 
 class NewThread extends Thread {

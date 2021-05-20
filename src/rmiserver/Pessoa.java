@@ -99,6 +99,10 @@ public class Pessoa implements Serializable {
         return this.Tables;
     }
 
+    public void setTables(ArrayList<String> tables) {
+        Tables = tables;
+    }
+
     public String getTypePerson() {
         return typePerson;
     }

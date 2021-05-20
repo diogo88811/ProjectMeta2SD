@@ -630,16 +630,18 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 
 	public void saveVotedPlaceOnPeople(String name, String ccNumber, String table) throws RemoteException {
 
-		Pessoa aux = null;
+		System.out.println(name + " " + ccNumber +" " + table);
 		for (int i = 0; i < person.size(); i++) {
 			if (person.get(i).nome.equals(name) && person.get(i).CCnumber.equals(ccNumber)) {
-				aux = person.get(i);
+				ArrayList<String> aux = person.get(i).getTables();
+				if(aux == null){
+					aux = new ArrayList<String>();
+				}
+				aux.add(table);
+				person.get(i).setTables(aux);
 			}
 		}
-		aux.getTables().add(table);
-
 		writeToFile("Pessoas.txt");
-
 	}
 
 	public void writeToFile(String ficheiro) throws RemoteException {

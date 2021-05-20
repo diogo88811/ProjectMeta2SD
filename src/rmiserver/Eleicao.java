@@ -59,6 +59,14 @@ public class Eleicao implements Serializable {
         this.publicoAlvo = publicoAlvo;
     }
 
+    public int getVotosBranco() {
+        return votosBranco;
+    }
+
+    public int getVotoNulo() {
+        return votoNulo;
+    }
+
     public void setPeopleWhoVoted(ArrayList<Pessoa> peopleWhoVoted) {
         this.peopleWhoVoted = peopleWhoVoted;
     }

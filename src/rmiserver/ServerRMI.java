@@ -345,7 +345,7 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 			person = (ArrayList<Pessoa>) oin.readObject();
 
 			if (person.isEmpty()) {
-				System.out.println("sem pesoas");
+				System.out.println("Sem Pessoas");
 			}
 
 			else {
@@ -466,7 +466,6 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 	public void saveClients(String name, InterfaceClientRMI a) throws RemoteException {
 		System.out.println("CONNECTED WITH " + name);
 		clients.add(a);
-
 	}
 
 	public void saveAdmin(String name, InterfaceClientRMI a) throws RemoteException {
@@ -752,8 +751,7 @@ public class ServerRMI extends UnicastRemoteObject implements InterfaceServerRMI
 
 			h.loadDataElection();
 
-			System.out
-					.println("___________________________< RMI SERVER READY ! >_____________________________________");
+			System.out.println("___________________________< RMI SERVER READY ! >_____________________________________");
 
 			while (true) {
 
